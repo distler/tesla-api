@@ -15,7 +15,7 @@ module TeslaApi
       retry_options: nil,
       base_uri: nil,
       sso_uri: nil,
-      client_options: {headers: {"Accept" => "application/json"}}
+      client_options: {}
     )
       @email = email
       @base_uri = base_uri || BASE_URI
@@ -30,7 +30,7 @@ module TeslaApi
 
       @api = Faraday.new(
         @base_uri + "/api/1",
-        client_options
+        {headers: {"Accept" => "application/json"}}.merge(client_options)
       ) { |conn|
         # conn.response :logger, nil, {headers: true, bodies: true}
         conn.request :json
